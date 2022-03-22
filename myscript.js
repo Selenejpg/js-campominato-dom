@@ -1,6 +1,5 @@
 /*
 Consegna
-Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
 Il computer deve generare 16 numeri casuali nel range dei numeri della griglia: le bombe.
 I numeri nella lista delle bombe non possono essere duplicati.
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
@@ -34,6 +33,10 @@ let mainSize = document.getElementById("mainid");
 
 //Array di numeri casuali da 1 a 100
 let array = [];
+//Array per le bombe
+let arrayBombe = [];
+//Array 16 bombe
+let sediciBombe = [];
 
 //Al click del bottone cambiamo la griglia selezionata in base alla difficoltà selezionata e iniziamo a giocare
 start.addEventListener("click", function () {
@@ -69,6 +72,21 @@ start.addEventListener("click", function () {
 
     array = shuffle(array);
     console.log(array);
+
+    //Generare le bombe in base alla difficoltà e al numero di celle
+    for ( k = 1; k < numeroCelle + 1; k++ ) {
+        arrayBombe.push(bombe);    
+    }
+
+    arrayBombe = shuffle(arrayBombe);
+    console.log(`Le bombe sono: ${arrayBombe}`);
+
+    for (let bombe = 0; bombe < 16; bombe++) {
+        sediciBombe.push(arrayBombe[bombe]);  
+    }
+
+    console.log(`Le bombe sono: ${sediciBombe}`);
+
 
     for (let i = 0; i < numeroCelle; i++) {
         let grid = document.getElementById("grid");
