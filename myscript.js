@@ -1,17 +1,21 @@
-/*    
-Consegna:
-Generare una griglia di gioco quadrata, simile a quella dello screenshot, in cui ogni cella contiene un numero tra 1 e 100.
-Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
-
-Bonus:
-Permettere all'utente di indicare una difficoltà in base alla quale viene generato un numero variabile di celle:
+/*
+Consegna
+Copiamo la griglia fatta ieri nella nuova repo e aggiungiamo la logica del gioco (attenzione: non bisogna copiare tutta la cartella dell'esercizio ma solo l'index.html, e le cartelle js/ css/ con i relativi script e fogli di stile, per evitare problemi con l'inizializzazione di git).
+Il computer deve generare 16 numeri casuali nel range dei numeri della griglia: le bombe.
+I numeri nella lista delle bombe non possono essere duplicati.
+In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
+Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una b.
+BONUS:
+1- quando si clicca su una bomba e finisce la partita, evitare che si possa cliccare su altre celle
+2- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste
+3- l'utente indica un livello di difficoltà in base al quale viene generato un numero variabile di celle:
 con difficoltà 1 => tra 1 e 100
 con difficoltà 2 => tra 1 e 81
 con difficoltà 3 => tra 1 e 49
 */
 
 //Selezionare elementi DOM
-
 //Selezionare il bottone di inizio
 let start = document.getElementById("btn");
 
@@ -25,6 +29,8 @@ let box = document.createElement("div");
 
 //Selezionare p nella griglia
 let paragrafo = document.getElementById("welcome");
+//seleziono main
+let mainSize = document.getElementById("mainid");
 
 //Array di numeri casuali da 1 a 100
 let array = [];
@@ -35,20 +41,22 @@ start.addEventListener("click", function () {
     grid.innerHTML = "";
 
     //Aggiungo la classe "griglia" all'elemento grid
-    grid.classList.add("griglia");
+    //grid.classList.add("griglia");
     //Rimuovo la classe none dall'elemento grid
     grid.classList.remove("none");
     //Aggiungo la classe none dall'elemento p
-    paragrafo.classList.add("none")
+    paragrafo.classList.add("none");
+    //rimuovo altezza fissa main al click
+    mainSize.classList.remove("mainclass")
 
     let numeroCelle;
 
     if (select.value == "semplice") {
-        numeroCelle == 100;
+        numeroCelle = 100;
     }else if (select.value == "intermedio") {
-        numeroCelle == 81;
+        numeroCelle = 81;
     }else {
-        numeroCelle == 49;
+        numeroCelle = 49;
     }
 
     for (let y = 1; y < numeroCelle + 1; y++) {
