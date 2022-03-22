@@ -102,6 +102,10 @@ footer {
     background-color: lightblue;
 }
 
+.bomba {
+    background-color: rgb(66, 66, 66);
+}
+
 .heart {
     color: red;
 }
@@ -119,3 +123,4 @@ footer {
     padding-top: 35vh;
     color: white;
 }
+

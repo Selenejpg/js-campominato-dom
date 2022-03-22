@@ -74,8 +74,8 @@ start.addEventListener("click", function () {
     console.log(array);
 
     //Generare le bombe in base alla difficoltà e al numero di celle
-    for ( k = 1; k < numeroCelle + 1; k++ ) {
-        arrayBombe.push(bombe);    
+    for ( k = 0; k < numeroCelle; k++ ) {
+        arrayBombe.push(k);    
     }
 
     arrayBombe = shuffle(arrayBombe);
@@ -105,10 +105,7 @@ start.addEventListener("click", function () {
 
         box.innerHTML = `<span>${array[i]}</span>`;
 
-        box.addEventListener("click", function() {
-            this.classList.add("clicked");
-        })
-        
+        box.addEventListener("click", clickBox);
     }
 
 })
@@ -118,4 +115,24 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-  }
+}
+
+function clickBox() {
+    console.log(this.innerText);
+
+        if (sediciBombe.includes(parseInt(this.innerText))) {
+            this.classList.add("bomba");
+        }else {
+            this.classList.add("clicked");
+        }
+}
+
+/*
+function endGame() {
+    box.removeEventListener("click", clickBox)
+}
+
+box.addEventListener('click', endGame); //???dove
+
+*/
+
