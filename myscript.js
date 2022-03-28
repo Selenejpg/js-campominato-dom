@@ -37,6 +37,13 @@ let array = [];
 let arrayBombe = [];
 //Array 16 bombe
 let sediciBombe = [];
+//per ciclare box e richiamarle
+let arrayCelle = [];
+//contatore click
+let win = 0;
+//celle buone
+let celleUtili = 0;
+
 
 //Al click del bottone cambiamo la griglia selezionata in base alla difficoltà selezionata e iniziamo a giocare
 start.addEventListener("click", function () {
@@ -61,6 +68,8 @@ start.addEventListener("click", function () {
     }else {
         numeroCelle = 49;
     }
+
+    celleUtili = numeroCelle - 16
 
     for (let y = 1; y < numeroCelle + 1; y++) {
         array.push(y);    
@@ -87,25 +96,29 @@ start.addEventListener("click", function () {
 
     console.log(`Le bombe sono: ${sediciBombe}`);
 
+    for (let l = 0; l < array.length; l++) {
+        arrayCelle.push(
+           document.createElement("div")
+        ) 
+        
+    }
 
     for (let i = 0; i < numeroCelle; i++) {
         let grid = document.getElementById("grid");
 
-        let box = document.createElement("div");
-
-        grid.appendChild(box);
+        grid.appendChild(arrayCelle[i]);
 
         if (numeroCelle == 100) {
-            box.classList.add("box-10");
+            arrayCelle[i].classList.add("box-10");
         }else if (numeroCelle == 81) {
-            box.classList.add("box-9");
+            arrayCelle[i].classList.add("box-9");
         }else {
-            box.classList.add("box-7");
+            arrayCelle[i].classList.add("box-7");
         }
 
-        box.innerHTML = `<span>${array[i]}</span>`;
+        arrayCelle[i].innerHTML = `<span>${array[i]}</span>`;
 
-        box.addEventListener("click", clickBox);
+        arrayCelle[i].addEventListener("click", clickBox);
     }
 
 })
@@ -122,17 +135,21 @@ function clickBox() {
 
         if (sediciBombe.includes(parseInt(this.innerText))) {
             this.classList.add("bomba");
+            endGame();
         }else {
             this.classList.add("clicked");
+            win++
+            if (celleUtili == win) {
+                endGame();
+            }
+            
         }
 }
 
-/*
 function endGame() {
-    box.removeEventListener("click", clickBox)
+    for (let i = 0; i < arrayCelle.length; i++) {
+        arrayCelle[i].removeEventListener("click", clickBox) 
+    }
+    console.log(win);     
 }
-
-box.addEventListener('click', endGame); //???dove
-
-*/
 
